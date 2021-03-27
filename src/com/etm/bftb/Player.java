@@ -1,9 +1,7 @@
 package com.etm.bftb;
 
-import com.etm.bftb.map.Map;
 import com.etm.bftb.map.lattice.BlankLattice;
 import com.etm.bftb.map.lattice.ShelterLattice;
-import com.etm.bftb.map.prop.Dice;
 import com.etm.bftb.map.prop.EndangeredAnimalCard;
 import com.etm.bftb.map.prop.QACard;
 
@@ -48,6 +46,11 @@ public class Player {
     private boolean out;
 
     /**
+     * 是否入狱
+     */
+    private boolean jailed;
+
+    /**
      * 所在的格子数
      */
     private int step;
@@ -66,17 +69,6 @@ public class Player {
      */
     public void plusPrestige(int prestige) {
         this.prestige += prestige;
-    }
-
-    /**
-     * 投掷色子
-     */
-    public void throwingDice() {
-        int stepNum = Dice.getNum();
-        this.step += stepNum;
-        if (this.step > Map.totalLattice) {
-            this.step -= Map.totalLattice;
-        }
     }
 
     /**
@@ -135,7 +127,6 @@ public class Player {
         Scanner sc = new Scanner(System.in);
         String in = sc.next();
         if (qaCard.checkAnswer(in)) {
-            this.throwingDice();
             return true;
         } else {
             this.reducePrestige(200);
@@ -143,8 +134,13 @@ public class Player {
         }
     }
 
+    /**
+     * 购买收容所
+     * @param lattice 格子
+     */
     public void buyShelter(ShelterLattice lattice) {
-
+        this.reducePrestige(lattice.getPrestige());
+        lattice.setOwner(this);
     }
 
     public int getPrestige() {
@@ -159,4 +155,15 @@ public class Player {
         return current;
     }
 
+    public boolean isJailed() {
+        return jailed;
+    }
+
+    public void setJailed(boolean jailed) {
+        this.jailed = jailed;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

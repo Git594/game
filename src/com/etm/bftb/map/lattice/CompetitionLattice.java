@@ -19,7 +19,7 @@ public class CompetitionLattice extends ReturnableLattice {
 
     @Override
     public RunResult run(Player player) {
-        System.out.println("Congratulations on your participation in the knowledge contest!");
+        System.out.println(player.getName() + ", congratulations on your participation in the knowledge contest!");
         if (Objects.isNull(qaCards)) {
             throw new RuntimeException("Not obtained q a card!");
         }
