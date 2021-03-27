@@ -100,4 +100,8 @@ public class Player {
     public EndangeredAnimalCard getCard() {
         return card;
     }
+
+    public boolean isCurrent() {
+        return current;
+    }
 }
