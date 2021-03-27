@@ -3,6 +3,7 @@ package com.etm.bftb.map.prop;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.etm.bftb.constant.Prop.ENDANGERED_ANIMAL_CARDS;
 import static com.etm.bftb.constant.Prop.Q_A_CARD_COUNT;
@@ -31,6 +32,14 @@ public class Prop {
             QACard qaCard = cardFactory.createQACard(i);
             this.qaCards.add(qaCard);
         }
+    }
+
+    public EndangeredAnimalCard drawAnimalCards() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(animalCards.size());
+        EndangeredAnimalCard card = animalCards.get(randomIndex);
+        animalCards.remove(randomIndex);
+        return card;
     }
 
 //    /**

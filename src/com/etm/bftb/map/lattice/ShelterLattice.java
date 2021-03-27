@@ -25,16 +25,20 @@ public class ShelterLattice extends OwnedLattice {
             }
         } else {
             System.out.println("Current shelter owner: " + this.owner.getName());
-            System.out.println(player.getName() + ", you can choose to buy at a higher prestige or turn in your prestige.(1/2)");
-            Scanner sc = new Scanner(System.in);
-            String in = sc.next();
-            if ("1".equals(in)) {
-                System.out.println(player.getName() + ", please enter your purchase prestige.");
-                this.purchaseByHigherPrestige(player);
+            if (player.equals(this.owner)) {
+                System.out.println("You're in your own shelter");
             } else {
-                int prestige = 40;
-                player.reducePrestige(prestige);
-                this.owner.plusPrestige(prestige);
+                System.out.println(player.getName() + ", you can choose to buy at a higher prestige or turn in your prestige.(1/2)");
+                Scanner sc = new Scanner(System.in);
+                String in = sc.next();
+                if ("1".equals(in)) {
+                    System.out.println(player.getName() + ", please enter your purchase prestige.");
+                    this.purchaseByHigherPrestige(player);
+                } else {
+                    int prestige = 40;
+                    player.reducePrestige(prestige);
+                    this.owner.plusPrestige(prestige);
+                }
             }
         }
     }

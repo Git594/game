@@ -32,7 +32,7 @@ public class LatticeFactory {
             case 3: return new PoacherLattice(number);
             case 4: return new StartLattice(number);
             case 5: return new PrisonLattice(number);
-            case 6: return new AssemblyLattice(number);
+            case 6: return new MeetingLattice(number);
             case 7: return new CompetitionLattice(number);
             default: throw new RuntimeException();
         }

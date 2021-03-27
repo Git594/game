@@ -18,6 +18,7 @@ public class AnimalLattice extends NormalLattice {
 
     @Override
     public void run(Player player) {
+        System.out.println("The current lattice is the endangered animal lattice");
         if (player.getCard().getNumber().equals(this.endangeredAnimalNumber)) {
             player.plusPrestige(100);
         }

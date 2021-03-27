@@ -10,6 +10,7 @@ public class BlankLattice extends OwnedLattice {
 
     @Override
     public void run(Player player) {
+        System.out.println("The current lattice is the blank lattice");
         // 是否拥有栖息地
         boolean hasOwner = player.establishHabitat(this);
         if (hasOwner && !this.owner.equals(player)) {

@@ -5,14 +5,15 @@ import com.etm.bftb.Player;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AssemblyLattice extends SpecialLattice {
+public class MeetingLattice extends SpecialLattice {
 
-    public AssemblyLattice(int number) {
+    public MeetingLattice(int number) {
         super(number);
     }
 
     @Override
     public void run(List<Player> players) {
+        System.out.println("The current lattice is the meeting lattice");
         List<Player> current = players.stream().filter(Player::isCurrent).collect(Collectors.toList());
         if (current.size() == 1) {
             current.get(0).makeAComments();

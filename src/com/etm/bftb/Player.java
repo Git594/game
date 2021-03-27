@@ -1,8 +1,10 @@
 package com.etm.bftb;
 
+import com.etm.bftb.map.Map;
 import com.etm.bftb.map.lattice.BlankLattice;
 import com.etm.bftb.map.lattice.OwnedLattice;
 import com.etm.bftb.map.lattice.ShelterLattice;
+import com.etm.bftb.map.prop.Dice;
 import com.etm.bftb.map.prop.EndangeredAnimalCard;
 import com.etm.bftb.map.prop.QACard;
 
@@ -13,21 +15,24 @@ import java.util.Scanner;
 
 public class Player {
 
-    public Player(int prestige, EndangeredAnimalCard card) {
+    public Player(String name, int prestige, EndangeredAnimalCard card) {
+        this.name = name;
         this.prestige = prestige;
         this.card = card;
         this.lattices = new LinkedList<>();
+        this.step = 0;
+        this.out = false;
     }
 
     /**
      * 名称
      */
-    private String name;
+    private final String name;
 
     /**
      * 输入
      */
-    private String input;
+    private String comments;
 
     /**
      * 声望
@@ -69,7 +74,9 @@ public class Player {
      * @param prestige 减少的声望
      */
     public void reducePrestige(int prestige) {
+        System.out.println(this.getName() + ", you've reduced your prestige by" + prestige);
         this.prestige -= prestige;
+        System.out.println(this.getName() + "'s current reputation: " + this.prestige);
     }
 
     /**
@@ -77,7 +84,30 @@ public class Player {
      * @param prestige 增加的声望
      */
     public void plusPrestige(int prestige) {
+        System.out.println(this.getName() + ", you've plus your prestige by" + prestige);
         this.prestige += prestige;
+        System.out.println(this.getName() + "'s current reputation: " + this.prestige);
+    }
+
+    /**
+     * 投掷色子
+     * @return 点数
+     */
+    public int throwingDice() {
+        int result = Dice.getNum();
+        System.out.println("The number of points " + this.getName() + " throw is: " + result);
+        return result;
+    }
+
+    /**
+     * 移动棋子
+     * @param point 点数
+     */
+    public void movePiece(int point) {
+        this.step += point;
+        if (this.step > Map.TOTAL_LATTICE) {
+            this.step -= Map.TOTAL_LATTICE;
+        }
     }
 
     /**
@@ -104,7 +134,7 @@ public class Player {
     public void makeAComments() {
         System.out.println(this.name + ", please make your comments. it's your show time!");
         Scanner sc = new Scanner(System.in);
-        this.input = sc.next();
+        this.comments = sc.next();
     }
 
     /**
@@ -183,6 +213,10 @@ public class Player {
         return current;
     }
 
+    public void setCurrent(boolean current) {
+        this.current = current;
+    }
+
     public boolean isJailed() {
         return jailed;
     }
@@ -199,4 +233,19 @@ public class Player {
         return lattices;
     }
 
+    public void setLattices(List<OwnedLattice> lattices) {
+        this.lattices = lattices;
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public boolean isOut() {
+        return out;
+    }
+
+    public void setOut(boolean out) {
+        this.out = out;
+    }
 }

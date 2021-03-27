@@ -12,4 +12,9 @@ public class RunResult {
     public RunResult(boolean booleanValue) {
         this.booleanValue = booleanValue;
     }
+
+    public boolean isBooleanValue() {
+        return booleanValue;
+    }
+
 }

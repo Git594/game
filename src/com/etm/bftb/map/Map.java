@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Map {
 
-    public static final int totalLattice = Lattices.ANIMAL_COUNT + Lattices.BLANK_COUNT + Lattices.POACHER_COUNT
+    public static final int TOTAL_LATTICE = Lattices.ANIMAL_COUNT + Lattices.BLANK_COUNT + Lattices.POACHER_COUNT
             + Lattices.SPECIAL_COUNT + Lattices.SHELTER_COUNT;
 
     private final List<Lattice> lattices;
@@ -16,7 +16,7 @@ public class Map {
     public Map() {
         LatticeFactory factory = new LatticeFactory();
         this.lattices = new ArrayList<>();
-        for (int i = 0; i < totalLattice; i++) {
+        for (int i = 0; i < TOTAL_LATTICE; i++) {
             Lattice lattice;
             if (Lattices.FIXED_POSITION.contains(i)) {
                 lattice = factory.createLattice(1, i);
