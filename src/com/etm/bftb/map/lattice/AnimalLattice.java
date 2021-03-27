@@ -28,7 +28,8 @@ public class AnimalLattice extends NormalLattice {
         if (player.getCard().getNumber().equals(this.endangeredAnimalNumber)) {
             System.out.println("Your card is the same as this lattice");
             player.plusPrestige(100);
+        } else {
+            System.out.println("Your current endangered animal card is " + player.getCard().getTitle() + ". The two are different");
         }
-        System.out.println("Your current endangered animal card is " + player.getCard().getTitle() + ". The two are different");
     }
 }
