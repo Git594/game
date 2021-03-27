@@ -1,8 +1,11 @@
 package com.etm.bftb;
 
+import com.etm.bftb.map.lattice.BlankLattice;
+import com.etm.bftb.map.lattice.ShelterLattice;
 import com.etm.bftb.map.prop.Dice;
 import com.etm.bftb.map.prop.EndangeredAnimalCard;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Player {
@@ -18,9 +21,9 @@ public class Player {
     private String name;
 
     /**
-     * 言论
+     * 输入
      */
-    private String comments;
+    private String input;
 
     /**
      * 声望
@@ -90,7 +93,29 @@ public class Player {
     public void makeAComments() {
         System.out.println(this.name + ", please make your comments. it's your show time!");
         Scanner sc = new Scanner(System.in);
-        this.comments = sc.next();
+        this.input = sc.next();
+    }
+
+    /**
+     * 建立栖息地
+     * @param lattice 空白格子
+     * @return 是否已建立
+     */
+    public boolean establishHabitat(BlankLattice lattice) {
+        if (Objects.isNull(lattice.getOwner())) {
+            System.out.println(this.name + ", do you establish your animal habitat?(y/n)");
+            Scanner sc = new Scanner(System.in);
+            String in = sc.next();
+            if ("y".equals(in)) {
+                lattice.setOwner(this);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void buyShelter(ShelterLattice lattice) {
+
     }
 
     public int getPrestige() {
@@ -104,4 +129,5 @@ public class Player {
     public boolean isCurrent() {
         return current;
     }
+
 }
