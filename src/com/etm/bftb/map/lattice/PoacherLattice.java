@@ -10,6 +10,6 @@ public class PoacherLattice extends NormalLattice {
 
     @Override
     public void run(Player player) {
-
+        player.reducePrestige(200);
     }
 }
