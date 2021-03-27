@@ -35,4 +35,5 @@ public abstract class Lattice {
     public String toString() {
         return this.getClass() + ": number: " + this.number + ", type: " + this.type;
     }
+
 }

@@ -1,9 +1,11 @@
 package com.etm.bftb;
 
+import com.etm.bftb.map.Map;
 import com.etm.bftb.map.lattice.BlankLattice;
 import com.etm.bftb.map.lattice.ShelterLattice;
 import com.etm.bftb.map.prop.Dice;
 import com.etm.bftb.map.prop.EndangeredAnimalCard;
+import com.etm.bftb.map.prop.QACard;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -46,6 +48,11 @@ public class Player {
     private boolean out;
 
     /**
+     * 所在的格子数
+     */
+    private int step;
+
+    /**
      * 减少声望
      * @param prestige 减少的声望
      */
@@ -63,10 +70,13 @@ public class Player {
 
     /**
      * 投掷色子
-     * @return 点数
      */
-    public int throwingDice() {
-        return Dice.getNum();
+    public void throwingDice() {
+        int stepNum = Dice.getNum();
+        this.step += stepNum;
+        if (this.step > Map.totalLattice) {
+            this.step -= Map.totalLattice;
+        }
     }
 
     /**
@@ -112,6 +122,25 @@ public class Player {
             }
         }
         return false;
+    }
+
+    /**
+     * 答题
+     * @param qaCard 答题卡实体类
+     * @return 是否正确
+     */
+    public boolean answerQuestion(QACard qaCard) {
+        System.out.println("Please answer the question:");
+        System.out.println(qaCard.getTitle());
+        Scanner sc = new Scanner(System.in);
+        String in = sc.next();
+        if (qaCard.checkAnswer(in)) {
+            this.throwingDice();
+            return true;
+        } else {
+            this.reducePrestige(200);
+            return false;
+        }
     }
 
     public void buyShelter(ShelterLattice lattice) {

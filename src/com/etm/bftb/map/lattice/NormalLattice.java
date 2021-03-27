@@ -6,7 +6,7 @@ public abstract class NormalLattice extends Lattice {
     /**
      * 根据格子的规则执行动作
      *
-     * @param player 玩家（非拥有者）
+     * @param player 玩家
      */
     public abstract void run(Player player);
 

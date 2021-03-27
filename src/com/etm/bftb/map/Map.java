@@ -8,11 +8,12 @@ import java.util.List;
 
 public class Map {
 
+    public static final int totalLattice = Lattices.ANIMAL_COUNT + Lattices.BLANK_COUNT + Lattices.POACHER_COUNT
+            + Lattices.SPECIAL_COUNT + Lattices.SHELTER_COUNT;
+
     private final List<Lattice> lattices;
 
     public Map() {
-        int totalLattice = Lattices.ANIMAL_COUNT + Lattices.BLANK_COUNT + Lattices.POACHER_COUNT
-                + Lattices.SPECIAL_COUNT + Lattices.SHELTER_COUNT;
         LatticeFactory factory = new LatticeFactory();
         this.lattices = new ArrayList<>();
         for (int i = 0; i < totalLattice; i++) {

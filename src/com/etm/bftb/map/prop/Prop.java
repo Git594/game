@@ -1,9 +1,4 @@
-package com.etm.bftb.map;
-
-import com.etm.bftb.map.prop.Card;
-import com.etm.bftb.map.prop.CardFactory;
-import com.etm.bftb.map.prop.EndangeredAnimalCard;
-import com.etm.bftb.map.prop.QACard;
+package com.etm.bftb.map.prop;
 
 import java.io.IOException;
 import java.util.ArrayList;
