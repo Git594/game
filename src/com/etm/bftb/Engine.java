@@ -64,7 +64,7 @@ public class Engine {
                     continue;
                 }
                 // 运行一次
-                runOnce(player);
+                runOnce(player, iter);
                 player.setCurrent(false);
             }
             // 将入狱玩家改为出狱
@@ -99,7 +99,7 @@ public class Engine {
         return false;
     }
 
-    private void runOnce(Player player) {
+    private void runOnce(Player player, Iterator<Player> iter) {
         System.out.println(player.getName() + " start throwing dice");
         // 抛色子
         int point = player.throwingDice();
@@ -112,18 +112,18 @@ public class Engine {
         // 检查状态
         boolean out = checkStatus(player);
         if (out) {
-            out(player);
+            out(player, iter);
         } else if (runMoreTime) {
-            runOnce(player);
+            runOnce(player, iter);
         }
     }
 
-    private void out(Player player) {
+    private void out(Player player, Iterator<Player> iter) {
         List<OwnedLattice> ownedLattices = player.getLattices();
         for (OwnedLattice lattice : ownedLattices) {
             lattice.setOwner(null);
         }
-        players.remove(player);
+        iter.remove();
     }
 
     private boolean checkStatus(Player player) {
