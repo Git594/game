@@ -1,11 +1,15 @@
 package com.etm.bftb;
 
+import com.etm.bftb.map.prop.Dice;
+import com.etm.bftb.map.prop.EndangeredAnimalCard;
+
 import java.util.Scanner;
 
 public class Player {
 
-    public Player(int prestige) {
+    public Player(int prestige, EndangeredAnimalCard card) {
         this.prestige = prestige;
+        this.card = card;
     }
 
     /**
@@ -24,6 +28,11 @@ public class Player {
     private int prestige;
 
     /**
+     * 濒危动物卡
+     */
+    private final EndangeredAnimalCard card;
+
+    /**
      * 是否是当前玩家
      */
     private boolean current;
@@ -32,10 +41,6 @@ public class Player {
      * 是否出局
      */
     private boolean out;
-
-    public int getPrestige() {
-        return prestige;
-    }
 
     /**
      * 减少声望
@@ -88,4 +93,11 @@ public class Player {
         this.comments = sc.next();
     }
 
+    public int getPrestige() {
+        return prestige;
+    }
+
+    public EndangeredAnimalCard getCard() {
+        return card;
+    }
 }

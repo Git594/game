@@ -9,7 +9,7 @@ public class PoacherLattice extends NormalLattice {
     }
 
     @Override
-    public void compute(Player player) {
+    public void run(Player player) {
 
     }
 }

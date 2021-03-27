@@ -1,12 +1,14 @@
 package com.etm.bftb.map.lattice;
 
-import com.etm.bftb.constant.Consts;
+import com.etm.bftb.constant.Lattices;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class LatticeFactory {
+
+    private int animalCount = 0;
 
     private List<Integer> normalList;
     private List<Integer> specialList;
@@ -24,7 +26,7 @@ public class LatticeFactory {
         // 获取不重复的类型
         int r = getAvailableRandomInt(type, number);
         switch (r) {
-            case 0: return new AnimalLattice(number);
+            case 0: return new AnimalLattice(number, animalCount);
             case 1: return new BlankLattice(number);
             case 2: return new ShelterLattice(number);
             case 3: return new PoacherLattice(number);
@@ -54,28 +56,31 @@ public class LatticeFactory {
         int index = random.nextInt(list.size());
         int result = list.get(index);
         list.remove(index);
+        if (result == 0) {
+            animalCount++;
+        }
         return result;
     }
 
     private void createNormalList() {
         this.normalList = new ArrayList<>();
-        for (int i = 0; i < Consts.Lattices.ANIMAL; i++) {
+        for (int i = 0; i < Lattices.ANIMAL_COUNT; i++) {
             this.normalList.add(0);
         }
-        for (int i = 0; i < Consts.Lattices.BLANK; i++) {
+        for (int i = 0; i < Lattices.BLANK_COUNT; i++) {
             this.normalList.add(1);
         }
-        for (int i = 0; i < Consts.Lattices.SHELTER; i++) {
+        for (int i = 0; i < Lattices.SHELTER_COUNT; i++) {
             this.normalList.add(2);
         }
-        for (int i = 0; i < Consts.Lattices.POACHER; i++) {
+        for (int i = 0; i < Lattices.POACHER_COUNT; i++) {
             this.normalList.add(3);
         }
     }
 
     private void createSpecialList() {
         this.specialList = new ArrayList<>();
-        for (int i = 0; i < Consts.Lattices.SPECIAL; i++) {
+        for (int i = 0; i < Lattices.SPECIAL_COUNT; i++) {
             this.specialList.add(i + 4);
         }
     }

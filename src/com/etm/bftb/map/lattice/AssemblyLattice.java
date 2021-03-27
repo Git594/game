@@ -11,7 +11,7 @@ public class AssemblyLattice extends SpecialLattice {
     }
 
     @Override
-    public void compute(List<Player> players) {
+    public void run(List<Player> players) {
 
     }
 }

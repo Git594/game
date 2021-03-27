@@ -1,4 +1,4 @@
-package com.etm.bftb;
+package com.etm.bftb.map.prop;
 
 import java.util.Random;
 

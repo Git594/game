@@ -15,5 +15,5 @@ public abstract class SpecialLattice extends Lattice {
      * 根据格子的规则执行的动作
      * @param players 所有的玩家
      */
-    public abstract void compute(List<Player> players);
+    public abstract void run(List<Player> players);
 }

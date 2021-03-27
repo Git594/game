@@ -1,6 +1,6 @@
 package com.etm.bftb.map;
 
-import com.etm.bftb.constant.Consts;
+import com.etm.bftb.constant.Lattices;
 import com.etm.bftb.map.lattice.*;
 
 import java.util.ArrayList;
@@ -11,13 +11,13 @@ public class Map {
     private final List<Lattice> lattices;
 
     public Map() {
-        int totalLattice = Consts.Lattices.ANIMAL + Consts.Lattices.BLANK + Consts.Lattices.POACHER
-                + Consts.Lattices.SPECIAL + Consts.Lattices.SHELTER;
+        int totalLattice = Lattices.ANIMAL_COUNT + Lattices.BLANK_COUNT + Lattices.POACHER_COUNT
+                + Lattices.SPECIAL_COUNT + Lattices.SHELTER_COUNT;
         LatticeFactory factory = new LatticeFactory();
         this.lattices = new ArrayList<>();
         for (int i = 0; i < totalLattice; i++) {
             Lattice lattice;
-            if (Consts.Lattices.FIXED_POSITION.contains(i)) {
+            if (Lattices.FIXED_POSITION.contains(i)) {
                 lattice = factory.createLattice(1, i);
             } else {
                 lattice = factory.createLattice(0, i);
