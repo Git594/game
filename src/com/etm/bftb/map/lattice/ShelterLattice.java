@@ -17,7 +17,8 @@ public class ShelterLattice extends OwnedLattice {
     @Override
     public void run(Player player) {
         if (Objects.isNull(this.getOwner())) {
-            System.out.println(player.getName() + ", the current shelter is in a state of no owner, purchase or not?(y/n)");
+            System.out.println(player.getName() + ", the current shelter is in a state of no owner, purchase or not?" +
+                    " Your current prestige is " + player.getPrestige() + " (y/n)");
             Scanner scanner = new Scanner(System.in);
             String in = scanner.next();
             if ("y".equals(in)) {
@@ -28,7 +29,8 @@ public class ShelterLattice extends OwnedLattice {
             if (player.equals(this.owner)) {
                 System.out.println("You're in your own shelter");
             } else {
-                System.out.println(player.getName() + ", you can choose to buy at a higher prestige or turn in your prestige.(1/2)");
+                System.out.println(player.getName() + ", you can choose to buy at a higher prestige or turn in your" +
+                        " prestige. Your current prestige is " + player.getPrestige() + " (1/2)");
                 Scanner sc = new Scanner(System.in);
                 String in = sc.next();
                 if ("1".equals(in)) {
@@ -48,8 +50,8 @@ public class ShelterLattice extends OwnedLattice {
         int prestige = sc.nextInt();
         if (prestige > this.getPrestige()) {
             this.setPrestige(prestige);
-            player.buyShelter(this);
             this.getOwner().sellShelter(this);
+            player.buyShelter(this);
         } else {
             System.out.println(player.getName() + ", please enter a higher value.");
             purchaseByHigherPrestige(player);

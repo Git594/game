@@ -42,6 +42,9 @@ public class Prop {
         return card;
     }
 
+    public List<QACard> getQaCards() {
+        return qaCards;
+    }
 //    /**
 //     * 测试用
 //     * @param args 入参

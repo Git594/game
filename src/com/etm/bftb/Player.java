@@ -1,5 +1,7 @@
 package com.etm.bftb;
 
+import com.etm.bftb.constant.Game;
+import com.etm.bftb.constant.Lattices;
 import com.etm.bftb.map.Map;
 import com.etm.bftb.map.lattice.BlankLattice;
 import com.etm.bftb.map.lattice.OwnedLattice;
@@ -10,7 +12,6 @@ import com.etm.bftb.map.prop.QACard;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Player {
@@ -22,6 +23,7 @@ public class Player {
         this.lattices = new LinkedList<>();
         this.step = 0;
         this.out = false;
+        this.release = false;
     }
 
     /**
@@ -60,6 +62,11 @@ public class Player {
     private boolean jailed;
 
     /**
+     * 下一轮是否需要释放
+     */
+    private boolean release;
+
+    /**
      * 所在的格子数
      */
     private int step;
@@ -74,9 +81,9 @@ public class Player {
      * @param prestige 减少的声望
      */
     public void reducePrestige(int prestige) {
-        System.out.println(this.getName() + ", you've reduced your prestige by" + prestige);
+        System.out.println(this.getName() + ", you've reduced your prestige by " + prestige);
         this.prestige -= prestige;
-        System.out.println(this.getName() + "'s current reputation: " + this.prestige);
+        System.out.println(this.getName() + "'s current prestige: " + this.prestige);
     }
 
     /**
@@ -84,9 +91,9 @@ public class Player {
      * @param prestige 增加的声望
      */
     public void plusPrestige(int prestige) {
-        System.out.println(this.getName() + ", you've plus your prestige by" + prestige);
+        System.out.println(this.getName() + ", you've plus your prestige by " + prestige);
         this.prestige += prestige;
-        System.out.println(this.getName() + "'s current reputation: " + this.prestige);
+        System.out.println(this.getName() + "'s current prestige: " + this.prestige);
     }
 
     /**
@@ -105,9 +112,10 @@ public class Player {
      */
     public void movePiece(int point) {
         this.step += point;
-        if (this.step > Map.TOTAL_LATTICE) {
-            this.step -= Map.TOTAL_LATTICE;
+        if (this.step >= Lattices.TOTAL_LATTICE) {
+            this.step -= Lattices.TOTAL_LATTICE;
         }
+        System.out.println("Current location: " + (this.step + 1));
     }
 
     /**
@@ -140,20 +148,11 @@ public class Player {
     /**
      * 建立栖息地
      * @param lattice 空白格子
-     * @return 是否已建立
      */
-    public boolean establishHabitat(BlankLattice lattice) {
-        if (Objects.isNull(lattice.getOwner())) {
-            System.out.println(this.name + ", do you establish your animal habitat?(y/n)");
-            Scanner sc = new Scanner(System.in);
-            String in = sc.next();
-            if ("y".equals(in)) {
-                lattice.setOwner(this);
-                this.addLattice(lattice);
-                return true;
-            }
-        }
-        return false;
+    public void establishHabitat(BlankLattice lattice) {
+        lattice.setOwner(this);
+        this.reducePrestige(Game.HABITAT_ESTABLISH_PRESTIGE);
+        this.addLattice(lattice);
     }
 
     /**
@@ -247,5 +246,13 @@ public class Player {
 
     public void setOut(boolean out) {
         this.out = out;
+    }
+
+    public boolean isRelease() {
+        return release;
+    }
+
+    public void setRelease(boolean release) {
+        this.release = release;
     }
 }

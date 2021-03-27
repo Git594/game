@@ -2,23 +2,21 @@ package com.etm.bftb.map;
 
 import com.etm.bftb.constant.Lattices;
 import com.etm.bftb.map.lattice.*;
+import com.etm.bftb.map.prop.Prop;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
 
-    public static final int TOTAL_LATTICE = Lattices.ANIMAL_COUNT + Lattices.BLANK_COUNT + Lattices.POACHER_COUNT
-            + Lattices.SPECIAL_COUNT + Lattices.SHELTER_COUNT;
-
     private final List<Lattice> lattices;
 
     public Map() {
         LatticeFactory factory = new LatticeFactory();
         this.lattices = new ArrayList<>();
-        for (int i = 0; i < TOTAL_LATTICE; i++) {
+        for (int i = 0; i < Lattices.TOTAL_LATTICE; i++) {
             Lattice lattice;
-            if (Lattices.FIXED_POSITION.contains(i)) {
+            if (Lattices.FIXED_POSITION.contains(i + 1)) {
                 lattice = factory.createLattice(1, i);
             } else {
                 lattice = factory.createLattice(0, i);

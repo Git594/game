@@ -10,7 +10,7 @@ public class PoacherLattice extends NormalLattice {
 
     @Override
     public void run(Player player) {
-        System.out.println("你遭遇了偷猎者！");
+        System.out.println("You've met poachers!");
         player.reducePrestige(200);
     }
 }

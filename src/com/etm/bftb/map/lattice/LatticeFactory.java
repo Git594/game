@@ -1,6 +1,7 @@
 package com.etm.bftb.map.lattice;
 
 import com.etm.bftb.constant.Lattices;
+import com.etm.bftb.constant.Prop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Random;
 
 public class LatticeFactory {
 
-    private int animalCount = 0;
+    private int animalCount = -1;
 
     private List<Integer> normalList;
     private List<Integer> specialList;
@@ -26,7 +27,7 @@ public class LatticeFactory {
         // 获取不重复的类型
         int r = getAvailableRandomInt(type, number);
         switch (r) {
-            case 0: return new AnimalLattice(number, animalCount);
+            case 0: return new AnimalLattice(number, animalCount, Prop.ENDANGERED_ANIMAL_CARDS.get(animalCount));
             case 1: return new BlankLattice(number);
             case 2: return new ShelterLattice(number);
             case 3: return new PoacherLattice(number);

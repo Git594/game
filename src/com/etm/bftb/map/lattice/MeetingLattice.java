@@ -26,6 +26,8 @@ public class MeetingLattice extends SpecialLattice {
                 prestige += 100;
             }
         }
-        current.get(0).plusPrestige(prestige);
+        if (prestige > 0) {
+            current.get(0).plusPrestige(prestige);
+        }
     }
 }

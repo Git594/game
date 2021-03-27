@@ -9,5 +9,7 @@ public interface Lattices {
     int SHELTER_COUNT = 10;
     int POACHER_COUNT = 10;
     int SPECIAL_COUNT = 4;
-    List<Integer> FIXED_POSITION = Arrays.asList(0, 11, 22, 33);
+    int TOTAL_LATTICE = Lattices.ANIMAL_COUNT + Lattices.BLANK_COUNT + Lattices.POACHER_COUNT
+            + Lattices.SPECIAL_COUNT + Lattices.SHELTER_COUNT;
+    List<Integer> FIXED_POSITION = Arrays.asList(1, 12, 23, 34);
 }

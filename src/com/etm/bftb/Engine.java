@@ -35,6 +35,7 @@ public class Engine {
         map = new Map();
         Prop prop = new Prop();
         players = new ArrayList<>();
+        CompetitionLattice.setQaCards(prop.getQaCards());
         int maxPlayerCount = com.etm.bftb.constant.Prop.ENDANGERED_CARD_COUNT;
         System.out.println("Please input the number of players(2-" + maxPlayerCount + ")");
         Scanner sc1 = new Scanner(System.in);
@@ -46,31 +47,31 @@ public class Engine {
                 String name = sc2.next();
                 EndangeredAnimalCard card = prop.drawAnimalCards();
                 Player player = new Player(name, Game.PRESTIGE, card);
+                System.out.println(name + ", your endangered animal card is " + card.getTitle());
                 players.add(player);
             }
         }
     }
 
     private void run() {
-        List<Player> jailedPlayer = new LinkedList<>();
         while (players.size() > 1) {
             Iterator<Player> iter = players.listIterator();
             while (iter.hasNext()) {
                 Player player = iter.next();
                 player.setCurrent(true);
                 if (player.isJailed()) {
-                    System.out.println(player.getName() + " was suspended for one round because he/she was in prison");
-                    jailedPlayer.add(player);
-                    continue;
+                    if (player.isRelease()) {
+                        player.setJailed(false);
+                        player.setRelease(false);
+                    } else {
+                        System.out.println(player.getName() + " was suspended for one round because he/she was in prison");
+                        player.setRelease(true);
+                        continue;
+                    }
                 }
                 // 运行一次
                 runOnce(player, iter);
                 player.setCurrent(false);
-            }
-            // 将入狱玩家改为出狱
-            for (Player player : jailedPlayer) {
-                player.setJailed(false);
-                System.out.println(player.getName() + "is out of jail!");
             }
         }
         System.out.println("Congratulations, you are the winner, " + players.get(0).getName());
@@ -100,7 +101,10 @@ public class Engine {
     }
 
     private void runOnce(Player player, Iterator<Player> iter) {
-        System.out.println(player.getName() + " start throwing dice");
+        System.out.println(player.getName() + ", it's your turn to throw the dice (enter)");
+        // 等待确认
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
         // 抛色子
         int point = player.throwingDice();
         // 移动棋子
