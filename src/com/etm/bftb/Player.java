@@ -1,10 +1,13 @@
 package com.etm.bftb;
 
 import com.etm.bftb.map.lattice.BlankLattice;
+import com.etm.bftb.map.lattice.OwnedLattice;
 import com.etm.bftb.map.lattice.ShelterLattice;
 import com.etm.bftb.map.prop.EndangeredAnimalCard;
 import com.etm.bftb.map.prop.QACard;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -13,6 +16,7 @@ public class Player {
     public Player(int prestige, EndangeredAnimalCard card) {
         this.prestige = prestige;
         this.card = card;
+        this.lattices = new LinkedList<>();
     }
 
     /**
@@ -54,6 +58,11 @@ public class Player {
      * 所在的格子数
      */
     private int step;
+
+    /**
+     * 拥有的格子
+     */
+    private List<OwnedLattice> lattices;
 
     /**
      * 减少声望
@@ -110,6 +119,7 @@ public class Player {
             String in = sc.next();
             if ("y".equals(in)) {
                 lattice.setOwner(this);
+                this.addLattice(lattice);
                 return true;
             }
         }
@@ -141,6 +151,24 @@ public class Player {
     public void buyShelter(ShelterLattice lattice) {
         this.reducePrestige(lattice.getPrestige());
         lattice.setOwner(this);
+        this.addLattice(lattice);
+    }
+
+    /**
+     * 卖出收容所
+     * @param lattice 收容所
+     */
+    public void sellShelter(ShelterLattice lattice) {
+        this.plusPrestige(lattice.getPrestige());
+        this.removeLattice(lattice);
+    }
+
+    public void addLattice(OwnedLattice lattice) {
+        this.lattices.add(lattice);
+    }
+
+    public void removeLattice(ShelterLattice lattice) {
+        this.lattices.remove(lattice);
     }
 
     public int getPrestige() {
@@ -166,4 +194,9 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    public List<OwnedLattice> getLattices() {
+        return lattices;
+    }
+
 }
