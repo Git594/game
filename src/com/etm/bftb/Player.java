@@ -150,9 +150,13 @@ public class Player {
      * @param lattice 空白格子
      */
     public void establishHabitat(BlankLattice lattice) {
-        lattice.setOwner(this);
-        this.reducePrestige(Game.HABITAT_ESTABLISH_PRESTIGE);
-        this.addLattice(lattice);
+        if (this.getPrestige() >= Game.HABITAT_ESTABLISH_PRESTIGE) {
+            lattice.setOwner(this);
+            this.reducePrestige(Game.HABITAT_ESTABLISH_PRESTIGE);
+            this.addLattice(lattice);
+        } else {
+            System.out.println("Sorry, you don't have enough prestige to build a habitat");
+        }
     }
 
     /**
@@ -178,9 +182,13 @@ public class Player {
      * @param lattice 格子
      */
     public void buyShelter(ShelterLattice lattice) {
-        this.reducePrestige(lattice.getPrestige());
-        lattice.setOwner(this);
-        this.addLattice(lattice);
+        if (this.getPrestige() >= Game.HABITAT_ESTABLISH_PRESTIGE) {
+            this.reducePrestige(lattice.getPrestige());
+            lattice.setOwner(this);
+            this.addLattice(lattice);
+        } else {
+            System.out.println("Sorry, you don't have enough reputation to buy this shelter. Prestige needed : " + lattice.getPrestige());
+        }
     }
 
     /**
