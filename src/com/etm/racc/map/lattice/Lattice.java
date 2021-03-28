@@ -23,17 +23,13 @@ public abstract class Lattice {
         this.number = number;
     }
 
-    public int getType() {
-        return type;
-    }
-
     public void setType(int type) {
         this.type = type;
     }
 
     @Override
     public String toString() {
-        return this.getClass() + ": number: " + this.number + ", type: " + this.type;
+        return super.toString() + ": number: " + this.number + ", type: " + this.type;
     }
 
 }

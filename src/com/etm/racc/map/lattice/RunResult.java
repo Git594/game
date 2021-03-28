@@ -4,10 +4,7 @@ public class RunResult {
     /**
      * 布尔变量
      */
-    private boolean booleanValue;
-
-    public RunResult() {
-    }
+    private final boolean booleanValue;
 
     public RunResult(boolean booleanValue) {
         this.booleanValue = booleanValue;

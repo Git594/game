@@ -12,6 +12,6 @@ public abstract class NormalLattice extends Lattice {
 
     public NormalLattice(int number) {
         super(number);
-        this.type = 0;
+        this.setType(0);
     }
 }

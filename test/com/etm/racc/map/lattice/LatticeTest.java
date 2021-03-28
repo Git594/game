@@ -11,8 +11,7 @@ public class LatticeTest {
 
     @Before
     public void setUp() {
-        latticeUnderTest = new Lattice(0) {
-        };
+        latticeUnderTest = new BlankLattice(0);
     }
 
     @Test
@@ -20,9 +19,10 @@ public class LatticeTest {
         // Setup
 
         // Run the test
+        latticeUnderTest.setNumber(1);
         final String result = latticeUnderTest.toString();
 
         // Verify the results
-        assertEquals("result", result);
+        assertEquals(latticeUnderTest.getClass().getName() + "@" + Integer.toHexString(latticeUnderTest.hashCode()) + ": number: " + latticeUnderTest.getNumber() + ", type: " + 0, result);
     }
 }

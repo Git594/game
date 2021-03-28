@@ -8,7 +8,7 @@ public abstract class SpecialLattice extends Lattice {
 
     public SpecialLattice(int number) {
         super(number);
-        this.type = 1;
+        this.setType(1);
     }
 
     /**
