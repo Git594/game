@@ -16,16 +16,6 @@ import java.util.Scanner;
 
 public class Player {
 
-    public Player(String name, int prestige, EndangeredAnimalCard card) {
-        this.name = name;
-        this.prestige = prestige;
-        this.card = card;
-        this.lattices = new LinkedList<>();
-        this.step = 0;
-        this.out = false;
-        this.release = false;
-    }
-
     /**
      * 名称
      */
@@ -44,7 +34,7 @@ public class Player {
     /**
      * 濒危动物卡
      */
-    private final EndangeredAnimalCard card;
+    private EndangeredAnimalCard card;
 
     /**
      * 是否是当前玩家
@@ -75,6 +65,16 @@ public class Player {
      * 拥有的格子
      */
     private List<OwnedLattice> lattices;
+
+    public Player(String name, int prestige, EndangeredAnimalCard card) {
+        this.name = name;
+        this.prestige = prestige;
+        this.card = card;
+        this.lattices = new LinkedList<>();
+        this.step = 0;
+        this.out = false;
+        this.release = false;
+    }
 
     /**
      * 减少声望

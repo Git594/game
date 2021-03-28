@@ -1,13 +1,12 @@
 package com.etm.bftb.map.lattice;
 
 import com.etm.bftb.Player;
-import com.etm.bftb.constant.Prop;
+import com.etm.bftb.map.prop.Prop;
 import com.etm.bftb.map.prop.QACard;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.Scanner;
 
 public class CompetitionLattice extends ReturnableLattice {
 
@@ -24,7 +23,7 @@ public class CompetitionLattice extends ReturnableLattice {
             throw new RuntimeException("Not obtained q a card!");
         }
         Random random = new Random();
-        int index = random.nextInt(Prop.Q_A_CARD_COUNT);
+        int index = random.nextInt(Prop.getInstant().getQaCards().size());
         QACard qaCard = qaCards.get(index);
         boolean correct = player.answerQuestion(qaCard);
         return new RunResult(correct);

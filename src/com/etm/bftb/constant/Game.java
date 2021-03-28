@@ -9,7 +9,7 @@ public interface Game {
     /**
      * 游戏名称
      */
-    String NAME = "BFTB";
+    String NAME = "RACC";
 
     /**
      * 初始声望值

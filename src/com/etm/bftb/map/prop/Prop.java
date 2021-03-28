@@ -3,12 +3,14 @@ package com.etm.bftb.map.prop;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
-import static com.etm.bftb.constant.Prop.ENDANGERED_ANIMAL_CARDS;
-import static com.etm.bftb.constant.Prop.Q_A_CARD_COUNT;
-
 public class Prop {
+    /**
+     * 实例
+     */
+    private static Prop prop;
 
     /**
      * 濒危动物卡
@@ -20,15 +22,30 @@ public class Prop {
      */
     private final List<QACard> qaCards;
 
-    public Prop() throws IOException {
-        CardFactory cardFactory = new CardFactory();
-        this.animalCards = new ArrayList<>();
-        this.qaCards = new ArrayList<>();
-        for (int i = 0, len = ENDANGERED_ANIMAL_CARDS.size(); i < len; i++) {
-            EndangeredAnimalCard card = cardFactory.createAnimalCard(i);
-            this.animalCards.add(card);
+    public List<EndangeredAnimalCard> getAnimalCards() {
+        return animalCards;
+    }
+
+    public static Prop getInstant() {
+        if (Objects.isNull(prop)) {
+            try {
+                prop = new Prop();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        for (int i = 0; i < Q_A_CARD_COUNT; i++) {
+        return prop;
+    }
+
+    private Prop() throws IOException {
+        CardFactory cardFactory = new CardFactory();
+        animalCards = new ArrayList<>();
+        this.qaCards = new ArrayList<>();
+        for (int i = 0, len = CardFactory.getAnimalList().size(); i < len; i++) {
+            EndangeredAnimalCard card = cardFactory.createAnimalCard(i);
+            animalCards.add(card);
+        }
+        for (int i = 0, len = CardFactory.getQaList().size(); i < len; i++) {
             QACard qaCard = cardFactory.createQACard(i);
             this.qaCards.add(qaCard);
         }
@@ -37,9 +54,7 @@ public class Prop {
     public EndangeredAnimalCard drawAnimalCards() {
         Random random = new Random();
         int randomIndex = random.nextInt(animalCards.size());
-        EndangeredAnimalCard card = animalCards.get(randomIndex);
-        animalCards.remove(randomIndex);
-        return card;
+        return animalCards.remove(randomIndex);
     }
 
     public List<QACard> getQaCards() {

@@ -31,18 +31,18 @@ public class Engine {
         engine.run();
     }
 
-    private void init() throws IOException {
+    private void init() {
+        Prop prop = Prop.getInstant();
         map = new Map();
-        Prop prop = new Prop();
         players = new ArrayList<>();
         CompetitionLattice.setQaCards(prop.getQaCards());
-        int maxPlayerCount = com.etm.bftb.constant.Prop.ENDANGERED_CARD_COUNT;
+        int maxPlayerCount = prop.getAnimalCards().size();
         System.out.println("Please input the number of players(2-" + maxPlayerCount + ")");
         Scanner sc1 = new Scanner(System.in);
         int playerCount = sc1.nextInt();
         if (2 <= playerCount && playerCount <= maxPlayerCount) {
             for (int i = 0; i < playerCount; i++) {
-                System.out.println("Please input player name");
+                System.out.println("Player " + (i + 1) + ", please input player name");
                 Scanner sc2 = new Scanner(System.in);
                 String name = sc2.next();
                 EndangeredAnimalCard card = prop.drawAnimalCards();
@@ -54,7 +54,9 @@ public class Engine {
     }
 
     private void run() {
-        while (players.size() > 1) {
+        int endCount = players.size();
+        Player outPlayer = null;
+        while (players.size() == endCount) {
             Iterator<Player> iter = players.listIterator();
             while (iter.hasNext()) {
                 Player player = iter.next();
@@ -70,12 +72,19 @@ public class Engine {
                     }
                 }
                 // 运行一次
-                runOnce(player, iter);
+                outPlayer = runOnce(player, iter);
+                if (!Objects.isNull(outPlayer)) {
+                    break;
+                }
                 player.setCurrent(false);
             }
         }
-        System.out.println("Congratulations, you are the winner, " + players.get(0).getName());
-        System.out.println("Prestige at the time of victory: " + players.get(0).getPrestige());
+        if (Objects.isNull(outPlayer)) {
+            throw new RuntimeException("No player is out!");
+        } else {
+            System.out.println("Unfortunately, you lost, " + outPlayer.getName());
+            System.out.println("Prestige at the time of lost: " + outPlayer.getPrestige() + ", make persistent efforts");
+        }
     }
 
     private boolean runLattice(Lattice lattice, Player player) {
@@ -100,7 +109,7 @@ public class Engine {
         return false;
     }
 
-    private void runOnce(Player player, Iterator<Player> iter) {
+    private Player runOnce(Player player, Iterator<Player> iter) {
         System.out.println(player.getName() + ", it's your turn to throw the dice (enter)");
         // 等待确认
         Scanner sc = new Scanner(System.in);
@@ -117,9 +126,11 @@ public class Engine {
         boolean out = checkStatus(player);
         if (out) {
             out(player, iter);
+            return player;
         } else if (runMoreTime) {
-            runOnce(player, iter);
+            return runOnce(player, iter);
         }
+        return null;
     }
 
     private void out(Player player, Iterator<Player> iter) {
@@ -127,6 +138,7 @@ public class Engine {
         for (OwnedLattice lattice : ownedLattices) {
             lattice.setOwner(null);
         }
+        player.setRelease(false);
         iter.remove();
     }
 
