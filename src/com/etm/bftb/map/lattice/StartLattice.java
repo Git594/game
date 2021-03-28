@@ -1,6 +1,7 @@
 package com.etm.bftb.map.lattice;
 
 import com.etm.bftb.Player;
+import com.etm.bftb.constant.Game;
 
 public class StartLattice extends NormalLattice {
 
@@ -22,11 +23,11 @@ public class StartLattice extends NormalLattice {
         }
         if (habitatCount > 0) {
             System.out.println("You have " + habitatCount + " habitat");
-            player.reducePrestige(80 * habitatCount);
+            player.reducePrestige(Game.PRESTIGE_HABITAT_MAINTENANCE * habitatCount);
         }
         if (shelterCount > 0) {
             System.out.println("You have " + shelterCount + " shelter");
-            player.reducePrestige(50 * shelterCount);
+            player.reducePrestige(Game.PRESTIGE_SHELTER_MAINTENANCE * shelterCount);
         }
     }
 }

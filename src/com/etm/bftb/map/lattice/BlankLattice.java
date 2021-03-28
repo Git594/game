@@ -25,9 +25,11 @@ public class BlankLattice extends OwnedLattice {
                 player.establishHabitat(this);
             }
         } else if (!this.owner.equals(player)) {
-            int prestige = Game.HABITAT_TURN_IN_PRESTIGE;
+            int prestige = Game.PRESTIGE_TURN_IN_HABITAT;
             player.reducePrestige(prestige);
-            if (!this.owner.isJailed()) {
+            if (this.owner.isJailed()) {
+                System.out.println(this.owner.getName() + ", because you re in jail confiscating habitat gains: " + prestige);
+            } else {
                 this.owner.plusPrestige(prestige);
             }
         } else {

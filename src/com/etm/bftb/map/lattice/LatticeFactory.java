@@ -1,7 +1,6 @@
 package com.etm.bftb.map.lattice;
 
 import com.etm.bftb.constant.Lattices;
-import com.etm.bftb.constant.Prop;
 
 import java.util.ArrayList;
 import java.util.List;

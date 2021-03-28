@@ -1,6 +1,7 @@
 package com.etm.bftb.map.lattice;
 
 import com.etm.bftb.Player;
+import com.etm.bftb.constant.Game;
 import com.etm.bftb.map.prop.EndangeredAnimalCard;
 import com.etm.bftb.map.prop.Prop;
 
@@ -28,7 +29,7 @@ public class AnimalLattice extends NormalLattice {
         System.out.println("The current lattice is the endangered animal lattice. The animal is " + this.card.getTitle());
         if (player.getCard().equals(this.card)) {
             System.out.println("Your card is the same as this lattice");
-            player.plusPrestige(100);
+            player.plusPrestige(Game.PRESTIGE_SAME_ANIMAL);
         } else {
             System.out.println("Your current endangered animal card is " + player.getCard().getTitle() + ". The two are different");
         }

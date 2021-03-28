@@ -1,6 +1,7 @@
 package com.etm.bftb.map.lattice;
 
 import com.etm.bftb.Player;
+import com.etm.bftb.constant.Game;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class MeetingLattice extends SpecialLattice {
         int prestige = 0;
         for (Player player : players) {
             if (!player.isCurrent() && player.agreeOrNot()) {
-                prestige += 100;
+                prestige += Game.PRESTIGE_JOIN_MEETING;
             }
         }
         if (prestige > 0) {

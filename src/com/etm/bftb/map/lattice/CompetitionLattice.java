@@ -25,6 +25,8 @@ public class CompetitionLattice extends ReturnableLattice {
         Random random = new Random();
         int index = random.nextInt(Prop.getInstant().getQaCards().size());
         QACard qaCard = qaCards.get(index);
+        System.out.println("Please answer the question:");
+        System.out.println(qaCard.getTitle());
         boolean correct = player.answerQuestion(qaCard);
         return new RunResult(correct);
     }

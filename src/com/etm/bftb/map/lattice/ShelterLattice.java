@@ -1,6 +1,7 @@
 package com.etm.bftb.map.lattice;
 
 import com.etm.bftb.Player;
+import com.etm.bftb.constant.Game;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ public class ShelterLattice extends OwnedLattice {
 
     public ShelterLattice(int number) {
         super(number);
-        this.prestige = 200;
+        this.prestige = Game.PRESTIGE_INIT_SHELTER;
     }
 
     @Override
@@ -37,8 +38,11 @@ public class ShelterLattice extends OwnedLattice {
                     System.out.println(player.getName() + ", please enter your purchase prestige.");
                     this.purchaseByHigherPrestige(player);
                 } else {
-                    int prestige = 40;
+                    int prestige = Game.PRESTIGE_ENTER_SHELTER;
                     player.reducePrestige(prestige);
+                    if (this.owner.isJailed()) {
+                        System.out.println(this.owner.getName() + ", because you re in jail confiscating shelter gains: " + prestige);
+                    }
                     this.owner.plusPrestige(prestige);
                 }
             }

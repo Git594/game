@@ -16,7 +16,7 @@ public class CardFactory {
 
     private static JSONArray qaList;
 
-    {
+    static {
         try {
             String str = FileUtils.readFileToString(new File(Prop.ENDANGERED_ANIMAL_FILE_NAME), StandardCharsets.UTF_8);
             animalList = JSONArray.parseArray(str, String.class);
@@ -32,7 +32,7 @@ public class CardFactory {
      * @param type 类型，0为动物卡，1为问答卡
      * @return 卡片实例
      */
-    public Card createCard(int type, int number) throws IOException {
+    public Card createCard(int type, int number) {
         if (type == 0) {
             return createAnimalCard(number);
         } else {

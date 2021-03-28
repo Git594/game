@@ -10,7 +10,7 @@ public class PrisonLattice extends NormalLattice {
 
     @Override
     public void run(Player player) {
-        System.out.println(player.getName() + ", you re in jail");
+        System.out.println(player.getName() + ", you're in jail");
         player.setJailed(true);
     }
 }

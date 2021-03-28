@@ -2,7 +2,6 @@ package com.etm.bftb;
 
 import com.etm.bftb.constant.Game;
 import com.etm.bftb.constant.Lattices;
-import com.etm.bftb.map.Map;
 import com.etm.bftb.map.lattice.BlankLattice;
 import com.etm.bftb.map.lattice.OwnedLattice;
 import com.etm.bftb.map.lattice.ShelterLattice;
@@ -150,9 +149,9 @@ public class Player {
      * @param lattice 空白格子
      */
     public void establishHabitat(BlankLattice lattice) {
-        if (this.getPrestige() >= Game.HABITAT_ESTABLISH_PRESTIGE) {
+        if (this.getPrestige() >= Game.PRESTIGE_HABITAT_ESTABLISH) {
             lattice.setOwner(this);
-            this.reducePrestige(Game.HABITAT_ESTABLISH_PRESTIGE);
+            this.reducePrestige(Game.PRESTIGE_HABITAT_ESTABLISH);
             this.addLattice(lattice);
         } else {
             System.out.println("Sorry, you don't have enough prestige to build a habitat");
@@ -165,14 +164,12 @@ public class Player {
      * @return 是否正确
      */
     public boolean answerQuestion(QACard qaCard) {
-        System.out.println("Please answer the question:");
-        System.out.println(qaCard.getTitle());
         Scanner sc = new Scanner(System.in);
         String in = sc.next();
         if (qaCard.checkAnswer(in)) {
             return true;
         } else {
-            this.reducePrestige(200);
+            this.reducePrestige(Game.PRESTIGE_LOST_COMPETITION);
             return false;
         }
     }
@@ -182,7 +179,7 @@ public class Player {
      * @param lattice 格子
      */
     public void buyShelter(ShelterLattice lattice) {
-        if (this.getPrestige() >= Game.HABITAT_ESTABLISH_PRESTIGE) {
+        if (this.getPrestige() >= Game.PRESTIGE_HABITAT_ESTABLISH) {
             this.reducePrestige(lattice.getPrestige());
             lattice.setOwner(this);
             this.addLattice(lattice);

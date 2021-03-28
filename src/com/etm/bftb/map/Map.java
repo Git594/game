@@ -1,8 +1,8 @@
 package com.etm.bftb.map;
 
 import com.etm.bftb.constant.Lattices;
-import com.etm.bftb.map.lattice.*;
-import com.etm.bftb.map.prop.Prop;
+import com.etm.bftb.map.lattice.Lattice;
+import com.etm.bftb.map.lattice.LatticeFactory;
 
 import java.util.ArrayList;
 import java.util.List;
