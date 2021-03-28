@@ -4,7 +4,7 @@ public interface Game {
     /**
      * 儿童梦
      */
-    String OWNER = "ETM";
+    String OWNER = "CSC2058";
 
     /**
      * 游戏名称

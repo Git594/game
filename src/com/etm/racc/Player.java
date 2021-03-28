@@ -8,7 +8,9 @@ import com.etm.racc.map.lattice.ShelterLattice;
 import com.etm.racc.map.prop.Dice;
 import com.etm.racc.map.prop.EndangeredAnimalCard;
 import com.etm.racc.map.prop.QACard;
+import org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +20,7 @@ public class Player {
     /**
      * 名称
      */
-    private final String name;
+    private String name;
 
     /**
      * 输入
@@ -64,6 +66,9 @@ public class Player {
      * 拥有的格子
      */
     private List<OwnedLattice> lattices;
+
+    public Player() {
+    }
 
     public Player(String name, int prestige, EndangeredAnimalCard card) {
         this.name = name;
@@ -179,7 +184,7 @@ public class Player {
      * @param lattice 格子
      */
     public void buyShelter(ShelterLattice lattice) {
-        if (this.getPrestige() >= Game.PRESTIGE_HABITAT_ESTABLISH) {
+        if (this.getPrestige() >= Game.PRESTIGE_INIT_SHELTER) {
             this.reducePrestige(lattice.getPrestige());
             lattice.setOwner(this);
             this.addLattice(lattice);
