@@ -8,6 +8,7 @@ import com.etm.racc.map.prop.Prop;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Engine {
 
@@ -28,7 +29,8 @@ public class Engine {
         Engine engine = new Engine();
         engine.init();
         System.out.println("Game loaded!");
-        engine.run();
+        Player outPlayer = engine.run();
+        engine.over(outPlayer);
     }
 
     private void init() {
@@ -53,7 +55,7 @@ public class Engine {
         }
     }
 
-    private void run() {
+    private Player run() {
         int endCount = players.size();
         Player outPlayer = null;
         while (players.size() == endCount) {
@@ -79,11 +81,20 @@ public class Engine {
                 player.setCurrent(false);
             }
         }
+        return outPlayer;
+    }
+
+    private void over(Player outPlayer) {
         if (Objects.isNull(outPlayer)) {
             throw new RuntimeException("No player is out!");
         } else {
-            System.out.println("Unfortunately, you lost, " + outPlayer.getName());
-            System.out.println("Prestige at the time of lost: " + outPlayer.getPrestige() + ", make persistent efforts");
+            players.add(outPlayer);
+            List<Player> orderedPlayer = players.stream()
+                    .sorted(((o1, o2) -> o2.getPrestige() - o1.getPrestige())).collect(Collectors.toList());
+            System.out.println("**********************Game over, " + orderedPlayer.get(0).getName() + " is winner**********************");
+            for (Player player : orderedPlayer) {
+                System.out.println(player.getName() + "'s prestige is " + player.getPrestige());
+            }
         }
     }
 

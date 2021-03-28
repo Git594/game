@@ -53,9 +53,15 @@ public class ShelterLattice extends OwnedLattice {
         Scanner sc = new Scanner(System.in);
         int prestige = sc.nextInt();
         if (prestige > this.getPrestige()) {
-            this.setPrestige(prestige);
-            this.getOwner().sellShelter(this);
-            player.buyShelter(this);
+            if (prestige > player.getPrestige()) {
+                System.out.println(player.getName() + " , you don't have enough prestige. current prestige: "
+                        + player.getPrestige());
+                purchaseByHigherPrestige(player);
+            } else {
+                this.setPrestige(prestige);
+                this.getOwner().sellShelter(this);
+                player.buyShelter(this);
+            }
         } else {
             System.out.println(player.getName() + ", please enter a higher value.");
             purchaseByHigherPrestige(player);

@@ -172,9 +172,11 @@ public class Player {
         Scanner sc = new Scanner(System.in);
         String in = sc.next();
         if (qaCard.checkAnswer(in)) {
+            System.out.println("Congratulations, correct answer");
             return true;
         } else {
             this.reducePrestige(Game.PRESTIGE_LOST_COMPETITION);
+            System.out.println("Sorry, wrong answer");
             return false;
         }
     }
