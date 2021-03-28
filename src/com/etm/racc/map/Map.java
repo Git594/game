@@ -29,33 +29,4 @@ public class Map {
         return lattices;
     }
 
-//    /**
-//     * 测试用
-//     * @param args 入参
-//     */
-//    public static void main(String[] args) {
-//        Map map = new Map();
-//        int countAnimal = 0;
-//        int countBlank = 0;
-//        int countShelter = 0;
-//        int countPoacher = 0;
-//        int countSpecial = 0;
-//        for (Lattice lattice : map.lattices) {
-//            System.out.println(lattice.toString());
-//            if (lattice instanceof AnimalLattice) {
-//                countAnimal++;
-//            } else if (lattice instanceof BlankLattice) {
-//                countBlank++;
-//            } else if (lattice instanceof ShelterLattice) {
-//                countShelter++;
-//            } else if (lattice instanceof PoacherLattice) {
-//                countPoacher++;
-//            } else {
-//                countSpecial++;
-//            }
-//        }
-//        System.out.println("animal: " + countAnimal + ", blank: " + countBlank + ", shelter: " + countShelter +
-//                ", poacher: " + countPoacher + ", special: " + countSpecial);
-//    }
-
 }

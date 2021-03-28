@@ -60,19 +60,5 @@ public class Prop {
     public List<QACard> getQaCards() {
         return qaCards;
     }
-//    /**
-//     * 测试用
-//     * @param args 入参
-//     * @throws IOException 文件未找到
-//     */
-//    public static void main(String[] args) throws IOException {
-//        Prop prop = new Prop();
-//        for (EndangeredAnimalCard item : prop.animalCards) {
-//            System.out.println(item);
-//        }
-//        for (QACard item : prop.qaCards) {
-//            System.out.println(item);
-//        }
-//    }
 
 }
