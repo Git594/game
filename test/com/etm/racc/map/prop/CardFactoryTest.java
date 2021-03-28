@@ -1,9 +1,15 @@
 package com.etm.racc.map.prop;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.etm.racc.constant.Prop;
+import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -20,12 +26,17 @@ public class CardFactoryTest {
 
     @Test
     public void testCreateCard() {
-        // Setup
-
         // Run the test
         final Card result = cardFactoryUnderTest.createCard(0, 0);
 
         // Verify the results
+        Assert.assertTrue(result instanceof EndangeredAnimalCard);
+
+        // Run the test
+        final Card result2 = cardFactoryUnderTest.createCard(1, 0);
+
+        // Verify the results
+        Assert.assertTrue(result2 instanceof QACard);
     }
 
     @Test
@@ -49,15 +60,15 @@ public class CardFactoryTest {
     }
 
     @Test
-    public void testGetAnimalList() {
-        assertEquals(Collections.singletonList("value"), CardFactory.getAnimalList());
-        assertEquals(Collections.emptyList(), CardFactory.getAnimalList());
+    public void testGetAnimalList() throws IOException {
+        final JSONArray expectedResult = JSONArray.parseArray(FileUtils.readFileToString(new File(Prop.ENDANGERED_ANIMAL_FILE_NAME)));
+        assertEquals(expectedResult, CardFactory.getAnimalList());
     }
 
     @Test
-    public void testGetQaList() {
+    public void testGetQaList() throws IOException {
         // Setup
-        final JSONArray expectedResult = new JSONArray(Collections.singletonList("value"));
+        final JSONArray expectedResult = JSONArray.parseArray(FileUtils.readFileToString(new File(Prop.Q_A_FILE_NAME)));
 
         // Run the test
         final JSONArray result = CardFactory.getQaList();
